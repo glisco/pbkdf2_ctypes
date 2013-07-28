@@ -76,11 +76,8 @@ def pbkdf2_hex(data, salt, iterations=1000, keylen=24, hashfunc=None):
 def pbkdf2_bin(data, salt, iterations=1000, keylen=24, hashfunc=None):
     return pkcs5_pbkdf2_hmac(data, salt, iterations, keylen, hashfunc)
 
-
-
 if __name__ == '__main__':
     crypto.SSLeay_version.restype = ctypes.c_char_p
     print crypto.SSLeay_version(0)
     for h in hashlib_to_crypto_map:
         pkcs5_pbkdf2_hmac('secret' * 11, 'salt', hashfunc=h)
-
