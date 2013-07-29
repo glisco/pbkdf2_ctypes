@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-""" 
+"""
     pbkdf2_ctypes
     ~~~~~~
 
     This module implements pbkdf2 for Python using crypto lib from
-    openssl.  
-    
+    openssl.
+
     Note: This module is intended as a plugin replacement of pbkdf2.py
     by Armin Ronacher.
 
@@ -21,27 +21,30 @@ import hashlib
 import platform
 import os.path
 
-try: # check that we have proper OpenSSL on the system.
+try:  # check that we have proper OpenSSL on the system.
     system = platform.system()
     if system == 'Windows':
         if platform.architecture()[0] == '64bit':
-            crypto = ctypes.CDLL(os.path.basename(ctypes.util.find_library('libeay64')))
+            crypto = ctypes.CDLL(os.path.basename(
+                ctypes.util.find_library('libeay64')))
         else:
-            crypto = ctypes.CDLL(os.path.basename(ctypes.util.find_library('libeay32')))
+            crypto = ctypes.CDLL(os.path.basename(
+                ctypes.util.find_library('libeay32')))
     else:
-        crypto = ctypes.CDLL(os.path.basename(ctypes.util.find_library('crypto')))
+        crypto = ctypes.CDLL(os.path.basename(
+            ctypes.util.find_library('crypto')))
 
     PKCS5_PBKDF2_HMAC = crypto.PKCS5_PBKDF2_HMAC
 
-    hashlib_to_crypto_map =  {hashlib.md5: crypto.EVP_md5,
-                              hashlib.sha1: crypto.EVP_sha1,
-                              hashlib.sha256: crypto.EVP_sha256,
-                              hashlib.sha224: crypto.EVP_sha224,
-                              hashlib.sha384: crypto.EVP_sha384,
-                              hashlib.sha512: crypto.EVP_sha512
-    }
+    hashlib_to_crypto_map = {hashlib.md5: crypto.EVP_md5,
+                             hashlib.sha1: crypto.EVP_sha1,
+                             hashlib.sha256: crypto.EVP_sha256,
+                             hashlib.sha224: crypto.EVP_sha224,
+                             hashlib.sha384: crypto.EVP_sha384,
+                             hashlib.sha512: crypto.EVP_sha512}
 except OSError, AttributeError:
-    raise ImportError('Cannot find a compatible OpenSSL installation on your system')
+    raise ImportError('Cannot find a compatible OpenSSL installation '
+                      'on your system')
 
 
 def pkcs5_pbkdf2_hmac(data, salt, iterations=1000, keylen=24, hashfunc=None):
@@ -72,8 +75,11 @@ def pkcs5_pbkdf2_hmac(data, salt, iterations=1000, keylen=24, hashfunc=None):
         raise ValueError('wrong parameters')
     return c_buff.raw[:keylen]
 
+
 def pbkdf2_hex(data, salt, iterations=1000, keylen=24, hashfunc=None):
-    return pkcs5_pbkdf2_hmac(data, salt, iterations, keylen, hashfunc).encode('hex')
+    return pkcs5_pbkdf2_hmac(data, salt, iterations, keylen, hashfunc).\
+        encode('hex')
+
 
 def pbkdf2_bin(data, salt, iterations=1000, keylen=24, hashfunc=None):
     return pkcs5_pbkdf2_hmac(data, salt, iterations, keylen, hashfunc)
