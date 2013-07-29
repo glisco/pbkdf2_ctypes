@@ -16,18 +16,20 @@
 """
 
 import ctypes
+import ctypes.util
 import hashlib
 import platform
-
+import os.path
 
 try: # check that we have proper OpenSSL on the system.
-    if platform.system()=='Windows':
+    system = platform.system()
+    if system == 'Windows':
         if platform.architecture()[0] == '64bit':
-            crypto = ctypes.CDLL('libeay64.dll')
+            crypto = ctypes.CDLL(os.path.basename(ctypes.util.find_library('libeay64')))
         else:
-            crypto = ctypes.CDLL('libeay32.dll')
-    else: # should work on most unix os'.
-        crypto = ctypes.CDLL('libcrypto.so')
+            crypto = ctypes.CDLL(os.path.basename(ctypes.util.find_library('libeay32')))
+    else:
+        crypto = ctypes.CDLL(os.path.basename(ctypes.util.find_library('crypto')))
 
     PKCS5_PBKDF2_HMAC = crypto.PKCS5_PBKDF2_HMAC
 
