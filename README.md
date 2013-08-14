@@ -6,7 +6,8 @@ A pbkdf2 implementation for python using ctypes.
 This module implements pbkdf2 for Python using C libraries available on the system (OpenSSL-1+ or CommonCrypto).
     
 Note: This module is intended as a plugin replacement of pbkdf2.py (https://github.com/mitsuhiko/python-pbkdf2)
-by Armin Ronacher.  There is no need to compile it so it should be usable on any system where OpenSSL is installed.
+by Armin Ronacher.  There is no need to compile it so it should be usable on any system where OpenSSL 1.0.0+ or CommonCrypto (OS X)
+is installed.
 
 Why?
 -------
