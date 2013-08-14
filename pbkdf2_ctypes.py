@@ -3,8 +3,10 @@
     pbkdf2_ctypes
     ~~~~~~
 
+    Fast pbkdf2.
+
     This module implements pbkdf2 for Python using crypto lib from
-    openssl.
+    openssl or commoncrypto.
 
     Note: This module is intended as a plugin replacement of pbkdf2.py
     by Armin Ronacher.
@@ -22,6 +24,8 @@ import ctypes.util
 import hashlib
 import platform
 import os.path
+
+__all__ = ['pkcs5_pbkdf2_hmac', 'pbkdf2_bin', 'pbkdf2_hex']
 
 def commoncrypto_hashlib_to_crypto_map_get(hashfunc):
     hashlib_to_crypto_map = {hashlib.sha1: 1,
@@ -149,6 +153,8 @@ except (OSError, AttributeError), e:
 
 
 def pkcs5_pbkdf2_hmac(data, salt, iterations=1000, keylen=24, hashfunc=None):
+    if hashfunc is None:
+        hashfunc = hashlib.sha1
     err, c_buff = _pbkdf2_hmac(data, salt, iterations, hashfunc, keylen)
 
     if err == 0:
