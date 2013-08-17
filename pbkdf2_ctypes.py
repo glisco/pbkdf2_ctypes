@@ -24,6 +24,7 @@ import ctypes.util
 import hashlib
 import platform
 import os.path
+import binascii
 
 __all__ = ['pkcs5_pbkdf2_hmac', 'pbkdf2_bin', 'pbkdf2_hex']
 
@@ -147,7 +148,7 @@ try:  # check that we have proper OpenSSL or Common Crypto on the system.
         _pbkdf2_hmac = openssl_pbkdf2
         crypto.PKCS5_PBKDF2_HMAC # test compatibility
 
-except (OSError, AttributeError), e:
+except (OSError, AttributeError) as e:
     raise ImportError('Cannot find a compatible cryptographic library '
                       'on your system')
 
@@ -163,8 +164,7 @@ def pkcs5_pbkdf2_hmac(data, salt, iterations=1000, keylen=24, hashfunc=None):
 
 
 def pbkdf2_hex(data, salt, iterations=1000, keylen=24, hashfunc=None):
-    return pkcs5_pbkdf2_hmac(data, salt, iterations, keylen, hashfunc).\
-        encode('hex')
+    return binascii.hexlify(pkcs5_pbkdf2_hmac(data, salt, iterations, keylen, hashfunc))
 
 
 def pbkdf2_bin(data, salt, iterations=1000, keylen=24, hashfunc=None):
@@ -173,10 +173,10 @@ def pbkdf2_bin(data, salt, iterations=1000, keylen=24, hashfunc=None):
 if __name__ == '__main__':
     try:
         crypto.SSLeay_version.restype = ctypes.c_char_p
-        print crypto.SSLeay_version(0)
+        print(crypto.SSLeay_version(0))
     except:
         pass
 
     for h in [hashlib.sha1, hashlib.sha224, hashlib.sha256,
               hashlib.sha384, hashlib.sha512]:
-        print pkcs5_pbkdf2_hmac('secret' * 11, 'salt', hashfunc=h).encode('hex')
+        print(pkcs5_pbkdf2_hmac('secret' * 11, 'salt', hashfunc=h).encode('hex'))

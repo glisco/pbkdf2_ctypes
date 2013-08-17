@@ -1,5 +1,5 @@
 pbkdf2_ctypes.py
-=============
+================
 
 A pbkdf2 implementation for python using ctypes.
 
@@ -21,3 +21,37 @@ implementation.
 
 Copyright :copyright: 2013: Michele Comitini
 License LGPLv3
+
+CHANGELOG
+----------------------
+
+[2013-08-17]
+ * v0.99.2: added support for python3
+
+[2013-08-16]
+ * preparing 0.99.1 to fix problems with pypi
+
+[2013-08-14]
+ * added tests.py and prepared for distutils.
+
+[2013-08-08]
+ * Update README.md
+
+[2013-08-05]
+
+[2013-07-31]
+ * fixed OS X compatibility, should work also on iOS.  Added arg type checks and conversions.
+ * added support for common crypto hence hopefully OS X
+
+[2013-07-29]
+ * missing () around exceptions
+ * pep8
+ * now uses ctypes magic to find library
+
+[2013-07-28]
+ * added module
+ * added module
+ * Update README.md
+ * Initial commit
+
+
