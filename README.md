@@ -26,6 +26,7 @@ CHANGELOG
 ----------------------
 
 [2013-08-17]
+ * v0.99.3: fixed main().  Prepended "_" to internal functions.
  * v0.99.2: added support for python3
 
 [2013-08-16]
@@ -41,17 +42,16 @@ CHANGELOG
 
 [2013-07-31]
  * fixed OS X compatibility, should work also on iOS.  Added arg type checks and conversions.
- * added support for common crypto hence hopefully OS X
 
 [2013-07-29]
+ * added support for common crypto hence hopefully OS X
+
+[2013-07-28]
  * missing () around exceptions
  * pep8
  * now uses ctypes magic to find library
-
-[2013-07-28]
  * added module
  * added module
  * Update README.md
  * Initial commit
-
 
