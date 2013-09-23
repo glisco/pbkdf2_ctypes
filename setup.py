@@ -16,6 +16,10 @@ setup(
     zip_safe=False,
     classifiers=[
         'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
-        'Programming Language :: Python'
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 3',
+        'Development Status :: 4 - Beta',
+        'Topic :: Security :: Cryptography',
     ]
 )
