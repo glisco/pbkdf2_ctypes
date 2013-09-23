@@ -129,12 +129,14 @@ try:  # check that we have proper OpenSSL or Common Crypto on the system.
         else:
             libname = ctypes.util.find_library('libeay32')
             if not libname:
-                raise OSError('Library not found')
+                raise OSError('Library libeay32 not found.')
 
             crypto = ctypes.CDLL(os.path.basename(libname))
         _pbkdf2_hmac = _openssl_pbkdf2
         crypto.PKCS5_PBKDF2_HMAC # test compatibility
     elif system == 'Darwin': # think different(TM)! i.e. break things!
+        if [int(x) for x in platform.mac_ver()[0].split('.')] < [10, 7, 0]:
+            raise OSError('OS X Version too old %s < 10.7.0' % platform.mac_ver()[0])
         libname = ctypes.util.find_library('System')
         if not libname:
             raise OSError('Library not found')
@@ -144,14 +146,14 @@ try:  # check that we have proper OpenSSL or Common Crypto on the system.
     else:
         libname = ctypes.util.find_library('crypto')
         if not libname:
-            raise OSError('not found')
+            raise OSError('Library crypto not found.')
         crypto = ctypes.CDLL(os.path.basename(libname))
         _pbkdf2_hmac = _openssl_pbkdf2
         crypto.PKCS5_PBKDF2_HMAC # test compatibility
 
 except (OSError, AttributeError) as e:
     raise ImportError('Cannot find a compatible cryptographic library '
-                      'on your system')
+                      'on your system. %s' % e)
 
 
 def pkcs5_pbkdf2_hmac(data, salt, iterations=1000, keylen=24, hashfunc=None):
