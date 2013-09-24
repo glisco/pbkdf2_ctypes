@@ -1,5 +1,6 @@
 import os
 from setuptools import setup
+from pbkdf2_ctypes import __version__ as VERSION
 
 readme = open(os.path.join(os.path.dirname(__file__), 'README.md'), 'r').read()
 
@@ -7,7 +8,7 @@ setup(
     name='pbkdf2-ctypes',
     author='Michele Comitini',
     author_email='mcm@glisco.it',
-    version='0.99.3',
+    version=VERSION,
     url='https://github.com/michele-comitini/pbkdf2_ctypes',
     download_url='https://github.com/michele-comitini/pbkdf2_ctypes/archive/0.99.3.zip',
     py_modules=['pbkdf2_ctypes'],
