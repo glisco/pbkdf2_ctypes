@@ -24,6 +24,9 @@ License LGPLv3
 
 CHANGELOG
 ----------------------
+[2013-09-24]
+ * v0.99.4: better support for python2.5.  Comply to PATH on Windows.  
+   Better OS detection on OS X.
 
 [2013-08-17]
  * v0.99.3: fixed main().  Prepended "_" to internal functions.

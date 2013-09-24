@@ -10,7 +10,7 @@ setup(
     author_email='mcm@glisco.it',
     version=VERSION,
     url='https://github.com/michele-comitini/pbkdf2_ctypes',
-    download_url='https://github.com/michele-comitini/pbkdf2_ctypes/archive/0.99.3.zip',
+    download_url='https://github.com/michele-comitini/pbkdf2_ctypes/archive/' + VERSION + '.zip',
     py_modules=['pbkdf2_ctypes'],
     description='Very fast implementation of pbkdf2.',
     long_description=readme,
