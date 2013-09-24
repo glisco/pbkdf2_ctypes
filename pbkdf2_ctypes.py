@@ -125,13 +125,13 @@ try:  # check that we have proper OpenSSL or Common Crypto on the system.
             libname = ctypes.util.find_library('libeay64')
             if not libname:
                 raise OSError('Library not found')
-            crypto = ctypes.CDLL(os.path.basename(libname))
+            crypto = ctypes.CDLL(libname)
         else:
             libname = ctypes.util.find_library('libeay32')
             if not libname:
                 raise OSError('Library libeay32 not found.')
 
-            crypto = ctypes.CDLL(os.path.basename(libname))
+            crypto = ctypes.CDLL(libname)
         _pbkdf2_hmac = _openssl_pbkdf2
         crypto.PKCS5_PBKDF2_HMAC # test compatibility
     elif system == 'Darwin': # think different(TM)! i.e. break things!
