@@ -24,6 +24,9 @@ License LGPLv3
 
 CHANGELOG
 ----------------------
+[2018-06-15]
+ * v0.99.5: Fix PyPi missing release files.
+ 
 [2013-09-24]
  * v0.99.4: better support for python2.5.  Comply to PATH on Windows.  
    Better OS detection on OS X.
